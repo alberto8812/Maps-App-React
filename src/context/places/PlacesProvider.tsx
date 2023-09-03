@@ -29,15 +29,14 @@ export const PlacesProvider = ({children}:Props) => {
 
 useEffect(() => {
     /**
-     * aqui es donde se va a octener la geolocalitacion
+     * obtener la geolocalitacion
      * se crea un helper
      */
-
     getUserLocation()
     .then((lngLat)=>dispatch({type: 'setUserLocation',payload:lngLat}))
 }, [])
 
-
+console.log(state)
   return (
     <PlacesContext.Provider value={{
      ...state //esparso el state del provideer  por todos los hijos  
