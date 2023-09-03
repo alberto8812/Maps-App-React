@@ -1,6 +1,7 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { PlacesContext } from "./PlacesContext";
 import { PlacesReducer } from "./PlacesReducer";
+import { getUserLocation } from "../../helper";
 
 
 /**
@@ -24,6 +25,18 @@ interface Props{
 
 export const PlacesProvider = ({children}:Props) => {
     const [state, dispatch] = useReducer(PlacesReducer, Initaial_state);
+
+
+useEffect(() => {
+    /**
+     * aqui es donde se va a octener la geolocalitacion
+     * se crea un helper
+     */
+
+    getUserLocation()
+    .then((lngLat)=>dispatch({type: 'setUserLocation',payload:lngLat}))
+}, [])
+
 
   return (
     <PlacesContext.Provider value={{
